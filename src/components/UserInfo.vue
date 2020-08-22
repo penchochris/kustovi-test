@@ -5,9 +5,10 @@
       {{ user.name }} {{ user.surname }}
     </span>
     <b-icon-pencil-square
-      class="h4 user-info-icon-edit"
-      @click="openModal(true)"
+      class="h4 user-info-icon"
+      @click="openModalEdit(true)"
     />
+    <b-icon-x-square class="h4 user-info-icon" @click="openModalDelete(true)" />
   </b-list-group-item>
 </template>
 
@@ -27,8 +28,12 @@ export default {
     BListGroupItem
   },
   methods: {
-    openModal() {
+    openModalEdit() {
       this.$bvModal.show("edit-modal");
+      this.$store.dispatch("setUser", this.$props.user);
+    },
+    openModalDelete() {
+      this.$bvModal.show("delete-modal");
       this.$store.dispatch("setUser", this.$props.user);
     }
   }
@@ -38,5 +43,8 @@ export default {
 <style>
 .user-info-name {
   padding-left: 10px;
+}
+.user-info-icon {
+  margin-right: 7px;
 }
 </style>

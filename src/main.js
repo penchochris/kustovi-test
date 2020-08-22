@@ -7,6 +7,7 @@ import BootstrapVue from "bootstrap-vue";
 import {
   BIconPencilSquare,
   BIconCheck2Square,
+  BIconXSquare,
   BModal,
   BToast
 } from "bootstrap-vue";
@@ -18,6 +19,7 @@ Vue.use(firestorePlugin);
 Vue.use(BootstrapVue);
 Vue.component("b-icon-pencil-square", BIconPencilSquare);
 Vue.component("b-icon-check2-square", BIconCheck2Square);
+Vue.component("b-icon-x-square", BIconXSquare);
 Vue.component("b-modal", BModal);
 Vue.component("b-toast", BToast);
 

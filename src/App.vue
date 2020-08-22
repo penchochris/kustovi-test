@@ -1,8 +1,24 @@
 <template>
   <div id="app">
     <b-toast />
-    <b-modal id="edit-modal" hide-footer>
+    <b-modal
+      id="edit-modal"
+      hide-footer
+      title="Editar usuario"
+      header-bg-variant="primary"
+      header-text-variant="light"
+    >
       <user-form :onSubmit="onEdit" :editableUser="this.$store.state.user" />
+    </b-modal>
+    <b-modal
+      id="delete-modal"
+      title="Eliminar usuario"
+      header-bg-variant="danger"
+      header-text-variant="light"
+      ok-variant="danger"
+      @ok="onDelete"
+    >
+      ¿Seguro quieres eliminar?
     </b-modal>
     <div class="create-user-container-app">
       <user-form :onSubmit="onSave" />
@@ -21,7 +37,7 @@ import AccessList from "./components/AccessList.vue";
 import { usersCollection } from "./firebase";
 
 export default {
-  nae: "App",
+  name: "App",
   firestore: {
     users: usersCollection
   },
@@ -69,6 +85,23 @@ export default {
       } catch (e) {
         this.$bvToast.toast("Error", {
           title: "Ha habido un error al editar el usuario",
+          autoHideDelay: 5000,
+          variant: "danger"
+        });
+      }
+    },
+    async onDelete() {
+      const { id } = this.$store.state.user;
+      try {
+        await usersCollection.doc(id).delete();
+        this.$bvToast.toast("Eliminado", {
+          title: "El usuario ha sido eliminado correctamente!",
+          autoHideDelay: 5000,
+          variant: "success"
+        });
+      } catch (e) {
+        this.$bvToast.toast("Error", {
+          title: "Ha habido un error al eliminar el usuario",
           autoHideDelay: 5000,
           variant: "danger"
         });
