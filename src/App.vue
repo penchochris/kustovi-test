@@ -46,13 +46,13 @@ export default {
           title: "El usuario ha sido añadido correctamente!",
           autoHideDelay: 5000,
           variant: "success"
-        })
+        });
       } catch (e) {
         this.$bvToast.toast("Error", {
           title: "Ha habido un error al añadir el usuario",
           autoHideDelay: 5000,
           variant: "danger"
-        })
+        });
       }
     },
     async onEdit(user) {
@@ -65,13 +65,13 @@ export default {
           title: "El usuario ha sido editado correctamente!",
           autoHideDelay: 5000,
           variant: "success"
-        })
+        });
       } catch (e) {
         this.$bvToast.toast("Error", {
           title: "Ha habido un error al editar el usuario",
           autoHideDelay: 5000,
           variant: "danger"
-        })
+        });
       }
     }
   }
