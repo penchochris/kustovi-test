@@ -1,28 +1,27 @@
 <template>
   <div class="access-list-container">
-    <h1>{{ title }}</h1>
-    <ul class="access-list-ul">
+    
+    <b-list-group class="access-list-group">
+      <b-list-group-item variant="dark">{{ title }}</b-list-group-item>
       <user-info v-for="user in users" :user="user" :key="user.id" />
-    </ul>
+    </b-list-group>
   </div>
 </template>
 
 <script>
 import UserInfo from "./UserInfo";
+import { BListGroup, BListGroupItem } from "bootstrap-vue";
 
 export default {
   name: "access-list",
   props: ["users", "title"],
-  methods: {
-    onEdit() {
-      console.log("edit");
-    }
-  },
   data() {
     return {};
   },
   components: {
-    UserInfo
+    UserInfo,
+    BListGroup,
+    BListGroupItem
   }
 };
 </script>
@@ -33,12 +32,9 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
 }
-.access-list-ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 350px;
+.access-list-group {
+  width: 500px;
 }
 </style>

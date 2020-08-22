@@ -1,66 +1,42 @@
 <template>
-  <div class="user-info-container">
-    <div class="user-info-icon-edit-wrapper">
-      <span class="user-info-icon-text">Edit</span>
-      <b-icon-pencil-square class="h4 user-info-icon-edit" @click="onEdit" />
-    </div>
-    <div class="user-info-wrapper">
-      <img class="user-info-img" :src="user.img" />
-      <div class="user-info-name-wrapper">
-        <div class="user-info-name">{{ user.name }}</div>
-        <div class="user-info-surname">{{ user.surname }}</div>
-      </div>
-    </div>
-  </div>
+  <b-list-group-item class="d-flex align-items-center">
+    <b-avatar :src="user.image"></b-avatar>
+    <span class="mr-auto user-info-name">
+      {{ user.name }} {{ user.surname }}
+    </span>
+    <b-icon-pencil-square
+      class="h4 user-info-icon-edit"
+      @click="openModal(true)"
+    />
+  </b-list-group-item>
 </template>
 
 <script>
+import { BAvatar, BListGroupItem } from "bootstrap-vue";
+
 export default {
   name: "user-info",
   props: ["user"],
-  components: {},
+  data() {
+    return {
+      modal: "user-info-modal-close"
+    };
+  },
+  components: {
+    BAvatar,
+    BListGroupItem
+  },
   methods: {
-    onEdit() {
-      console.log("EDITANDO");
+    openModal() {
+      this.$bvModal.show("edit-modal");
+      this.$store.dispatch("setUser", this.$props.user);
     }
   }
 };
 </script>
 
 <style>
-.user-info-container {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 10px;
-  margin: 10px 0;
-}
-.user-info-wrapper {
-  display: flex;
-  align-items: center;
-  padding: 0 30px 30px 30px;
-}
-.user-info-icon-edit-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  margin: 5px;
-}
-.user-info-name-wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-}
-.user-info-icon-edit {
-  cursor: pointer;
-}
-.user-info-icon-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
-}
-.user-info-img {
-  width: 34%;
-  border-radius: 10px;
+.user-info-name {
+  padding-left: 10px;
 }
 </style>

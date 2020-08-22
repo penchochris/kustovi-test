@@ -1,71 +1,79 @@
 <template>
   <div id="app">
+    <b-toast />
+    <b-modal id="edit-modal" hide-footer>
+      <user-form :onSubmit="onEdit" :editableUser="this.$store.state.user" />
+    </b-modal>
     <div class="create-user-container-app">
-      <create-user />
+      <user-form :onSubmit="onSave" />
     </div>
     <div class="access-list-container-app">
-      <access-list title="Con acceso" :users="users.withAccess" />
-      <access-list title="Sin acceso" :users="users.withoutAccess" />
+      <access-list title="Con acceso" :users="users.filter(u => u.access)" />
+      <access-list title="Sin acceso" :users="users.filter(u => !u.access)" />
     </div>
     <UserInfo />
   </div>
 </template>
 
 <script>
-import CreateUser from "./components/CreateUser.vue";
+import UserForm from "./components/UserForm.vue";
 import AccessList from "./components/AccessList.vue";
+import { usersCollection } from "./firebase";
 
 export default {
-  name: "App",
+  nae: "App",
+  firestore: {
+    users: usersCollection
+  },
+  beforeCreate: function() {
+    this.$options.components.AccessList = require("./components/AccessList.vue").default;
+  },
   data() {
     return {
-      users: {
-        withAccess: [
-          {
-            name: "Sucherino",
-            surname: "Wowframez Garcia",
-            img: "https://wow.zamimg.com/uploads/screenshots/small/449254.jpg",
-            id: "1"
-          },
-          {
-            name: "Such",
-            surname: "Wow",
-            img: "https://wow.zamimg.com/uploads/screenshots/small/449254.jpg",
-            id: "2"
-          },
-          {
-            name: "Such",
-            surname: "Wow",
-            img: "https://wow.zamimg.com/uploads/screenshots/small/449254.jpg",
-            id: "3"
-          }
-        ],
-        withoutAccess: [
-          {
-            name: "Such",
-            surname: "Wow",
-            img: "https://wow.zamimg.com/uploads/screenshots/small/449254.jpg",
-            id: "4"
-          },
-          {
-            name: "Such",
-            surname: "Wow",
-            img: "https://wow.zamimg.com/uploads/screenshots/small/449254.jpg",
-            id: "5"
-          },
-          {
-            name: "Such",
-            surname: "Wow",
-            img: "https://wow.zamimg.com/uploads/screenshots/small/449254.jpg",
-            id: "6"
-          }
-        ]
-      }
+      users: []
     };
   },
   components: {
-    CreateUser,
+    UserForm,
     AccessList
+  },
+  methods: {
+    async onSave(user) {
+      delete user.id;
+      try {
+        await usersCollection.add(user);
+        this.$bvToast.toast("Guardado", {
+          title: "El usuario ha sido añadido correctamente!",
+          autoHideDelay: 5000,
+          variant: "success"
+        })
+      } catch (e) {
+        this.$bvToast.toast("Error", {
+          title: "Ha habido un error al añadir el usuario",
+          autoHideDelay: 5000,
+          variant: "danger"
+        })
+      }
+    },
+    async onEdit(user) {
+      const id = user.id;
+      delete user.id;
+      try {
+        await usersCollection.doc(id).update(user);
+        this.$bvModal.hide("edit-modal");
+        this.$bvToast.toast("Editado", {
+          title: "El usuario ha sido editado correctamente!",
+          autoHideDelay: 5000,
+          variant: "success"
+        })
+      } catch (e) {
+        this.$bvToast.toast("Error", {
+          title: "Ha habido un error al editar el usuario",
+          autoHideDelay: 5000,
+          variant: "danger"
+        })
+      }
+    }
   }
 };
 </script>
@@ -83,7 +91,8 @@ export default {
 .access-list-container-app {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-width: 900px;
+  padding-top: 30px;
 }
 </style>
