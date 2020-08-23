@@ -125,13 +125,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 900px;
 }
 .access-list-container-app {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-items: flex-start;
-  min-width: 900px;
   padding-top: 30px;
 }
 </style>

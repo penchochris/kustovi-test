@@ -112,13 +112,20 @@ export default {
 <style>
 .user-form-container {
   display: flex;
-  padding-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.user-form-wrapper {
+  width: 270px;
+  padding-top: 20px;
 }
 .user-form-image-uploader {
   display: flex;
   flex-direction: column;
   max-width: 260px;
-  margin-right: 20px;
+  padding-top: 20px;
+  margin-right: 13px;
 }
 .user-form-image-preview {
   height: 260px;

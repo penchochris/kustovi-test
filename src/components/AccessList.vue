@@ -31,9 +31,9 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin: 10px;
 }
 .access-list-group {
-  width: 500px;
+  min-width: 400px;
 }
 </style>
