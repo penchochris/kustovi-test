@@ -1,6 +1,5 @@
 <template>
   <div class="access-list-container">
-    
     <b-list-group class="access-list-group">
       <b-list-group-item variant="dark">{{ title }}</b-list-group-item>
       <user-info v-for="user in users" :user="user" :key="user.id" />

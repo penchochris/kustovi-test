@@ -4,7 +4,7 @@
     <b-modal
       id="edit-modal"
       hide-footer
-      title="Editar usuario"
+      :title="$t('Edit user')"
       header-bg-variant="primary"
       header-text-variant="light"
     >
@@ -12,20 +12,26 @@
     </b-modal>
     <b-modal
       id="delete-modal"
-      title="Eliminar usuario"
+      :title="$t('Delete user')"
       header-bg-variant="danger"
       header-text-variant="light"
       ok-variant="danger"
       @ok="onDelete"
     >
-      ¿Seguro quieres eliminar?
+      {{ $t("Are you sure?") }}
     </b-modal>
     <div class="create-user-container-app">
       <user-form :onSubmit="onSave" />
     </div>
     <div class="access-list-container-app">
-      <access-list title="Con acceso" :users="users.filter(u => u.access)" />
-      <access-list title="Sin acceso" :users="users.filter(u => !u.access)" />
+      <access-list
+        :title="$t('With access')"
+        :users="users.filter(u => u.access)"
+      />
+      <access-list
+        :title="$t('Without access')"
+        :users="users.filter(u => !u.access)"
+      />
     </div>
     <UserInfo />
   </div>
@@ -58,14 +64,14 @@ export default {
       delete user.id;
       try {
         await usersCollection.add(user);
-        this.$bvToast.toast("Guardado", {
-          title: "El usuario ha sido añadido correctamente!",
+        this.$bvToast.toast(this.$t("User has been added!"), {
+          title: this.$t("Saved"),
           autoHideDelay: 5000,
           variant: "success"
         });
       } catch (e) {
-        this.$bvToast.toast("Error", {
-          title: "Ha habido un error al añadir el usuario",
+        this.$bvToast.toast(this.$t("Error adding the user."), {
+          title: this.$t("Error"),
           autoHideDelay: 5000,
           variant: "danger"
         });
@@ -77,14 +83,14 @@ export default {
       try {
         await usersCollection.doc(id).update(user);
         this.$bvModal.hide("edit-modal");
-        this.$bvToast.toast("Editado", {
-          title: "El usuario ha sido editado correctamente!",
+        this.$bvToast.toast(this.$t("User has been edited!"), {
+          title: this.$t("Edited"),
           autoHideDelay: 5000,
           variant: "success"
         });
       } catch (e) {
-        this.$bvToast.toast("Error", {
-          title: "Ha habido un error al editar el usuario",
+        this.$bvToast.toast(this.$t("Error editing the user."), {
+          title: this.$t("Error"),
           autoHideDelay: 5000,
           variant: "danger"
         });
@@ -94,14 +100,14 @@ export default {
       const { id } = this.$store.state.user;
       try {
         await usersCollection.doc(id).delete();
-        this.$bvToast.toast("Eliminado", {
-          title: "El usuario ha sido eliminado correctamente!",
+        this.$bvToast.toast(this.$t("User has been deleted!"), {
+          title: this.$t("Deleted"),
           autoHideDelay: 5000,
           variant: "success"
         });
       } catch (e) {
-        this.$bvToast.toast("Error", {
-          title: "Ha habido un error al eliminar el usuario",
+        this.$bvToast.toast(this.$t("Error deleting the user."), {
+          title: this.$t("Deleted"),
           autoHideDelay: 5000,
           variant: "danger"
         });

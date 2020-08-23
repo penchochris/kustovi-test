@@ -11,7 +11,7 @@
     <div class="user-form-wrapper">
       <b-form-group
         id="input-group-name"
-        label="Nombre:"
+        :label="$t('Name:')"
         label-for="input-name"
       >
         <b-form-input
@@ -23,7 +23,7 @@
       </b-form-group>
       <b-form-group
         id="input-group-surname"
-        label="Apellidos:"
+        :label="$t('Apellidos:')"
         label-for="input-surname"
       >
         <b-form-input
@@ -35,7 +35,7 @@
       </b-form-group>
       <b-form-group
         id="input-group-surname"
-        label="Acceso:"
+        :label="$t('Access:')"
         label-for="select-access"
       >
         <b-form-select
@@ -46,7 +46,7 @@
           :options="options"
         />
       </b-form-group>
-      <b-button type="submit" variant="primary">Guardar</b-button>
+      <b-button type="submit" variant="primary">{{ $t("Save") }}</b-button>
     </div>
   </b-form>
 </template>
@@ -55,7 +55,6 @@
 import {
   BForm,
   BFormFile,
-  //BFormInvalidFeedback,
   BFormGroup,
   BFormInput,
   BFormSelect,
@@ -78,7 +77,6 @@ export default {
   },
   components: {
     BForm,
-    //BFormInvalidFeedback,
     BFormFile,
     BFormGroup,
     BFormInput,
@@ -102,9 +100,9 @@ export default {
         access: null
       },
       options: [
-        { value: null, text: "Selecciona un tipo", disabled: true },
-        { value: true, text: "Si" },
-        { value: false, text: "No" }
+        { value: null, text: this.$t("Select a type"), disabled: true },
+        { value: true, text: this.$t("Yes") },
+        { value: false, text: this.$t("No") }
       ]
     };
   }
