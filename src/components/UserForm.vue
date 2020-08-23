@@ -23,7 +23,7 @@
       </b-form-group>
       <b-form-group
         id="input-group-surname"
-        :label="$t('Apellidos:')"
+        :label="$t('Surname:')"
         label-for="input-surname"
       >
         <b-form-input

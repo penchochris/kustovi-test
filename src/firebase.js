@@ -2,14 +2,14 @@ import { initializeApp } from "firebase";
 import "firebase/firestore";
 
 const config = {
-  apiKey: "AIzaSyDGMZpIiDLHXLKJ5pZyIK7roXMv72HMm2A",
-  authDomain: "kustovi-test-8b4bd.firebaseapp.com",
-  databaseURL: "https://kustovi-test-8b4bd.firebaseio.com",
-  projectId: "kustovi-test-8b4bd",
-  storageBucket: "kustovi-test-8b4bd.appspot.com",
-  messagingSenderId: "854716839161",
-  appId: "1:854716839161:web:f4a72f65ce6cffb6749e28",
-  measurementId: "G-HL5X4MPP55"
+  apiKey: process.env.VUE_APP_API_KEY,
+  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_DATABASE_URL,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_APP_ID,
+  measurementId: process.env.VUE_APP_MEASUREMENT_ID
 };
 
 export const db = initializeApp(config).firestore();

@@ -47,9 +47,6 @@ export default {
   firestore: {
     users: usersCollection
   },
-  beforeCreate: function() {
-    this.$options.components.AccessList = require("./components/AccessList.vue").default;
-  },
   data() {
     return {
       users: []
@@ -131,6 +128,6 @@ export default {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
-  padding-top: 30px;
+  padding: 30px;
 }
 </style>

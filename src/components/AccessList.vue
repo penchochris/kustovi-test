@@ -14,9 +14,6 @@ import { BListGroup, BListGroupItem } from "bootstrap-vue";
 export default {
   name: "access-list",
   props: ["users", "title"],
-  data() {
-    return {};
-  },
   components: {
     UserInfo,
     BListGroup,
@@ -34,6 +31,6 @@ export default {
   margin: 10px;
 }
 .access-list-group {
-  min-width: 400px;
+  min-width: 350px;
 }
 </style>
