@@ -20,5 +20,6 @@
   "Error": "Error",
   "Error adding the user.": "Ha habido un error al añadir el usuario.",
   "Error editing the user.": "Ha habido un error al editar el usuario.",
-  "Error deleting the user.": "Ha habido un error al eliminar el usuario."
+  "Error deleting the user.": "Ha habido un error al eliminar el usuario.",
+  "Only images can be uploaded.": "Solo se pueden subir imagenes."
 }

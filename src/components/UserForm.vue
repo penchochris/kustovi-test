@@ -61,7 +61,7 @@ import {
   BButton
 } from "bootstrap-vue";
 
-import { toBase64 } from "../helpers";
+import { toBase64, isImage } from "../helpers";
 
 export default {
   name: "user-form",
@@ -86,8 +86,16 @@ export default {
   methods: {
     async handleImage(e) {
       const file = e.target.files[0];
-      const base64 = await toBase64(file);
-      this.user.image = base64;
+      if (isImage(file)) {
+        const base64 = await toBase64(file);
+        this.user.image = base64;
+      } else {
+        this.$bvToast.toast(this.$t("Only images can be uploaded."), {
+          title: this.$t("Error"),
+          autoHideDelay: 5000,
+          variant: "danger"
+        });
+      }
     }
   },
   data() {
